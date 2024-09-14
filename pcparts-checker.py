@@ -44,11 +44,13 @@ print("Running.")
 
 commentIterator = 0
 searchTerms = ("Taichi Lite",
-               "Shadow Base",
-               "Dark Base",
+            #    "Shadow Base",
+            #    "Dark Base",
+               "9900X",
                "DDR5",
                "M.2",
                "5080",
+               "7950X",
                "Super Flower",
                "DDR5")
 exempt_terms = []
