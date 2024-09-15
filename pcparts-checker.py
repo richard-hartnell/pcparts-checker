@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 def make_alert(part):
-    return f"Hey, I found a {part} on /r/buildapcsales!"
+    return f"Hey, I found a {part} on /r/buildapcsales! \n {submission.title} \n Check it out here: https://www.reddit.com{submission.permalink}"
 
 # Your email and password
 email_address = "richard@bellinghamcircusguild.com"
@@ -33,7 +33,7 @@ def send_email(recipient_email, subject, body):
             server.login(email_address, email_password)
             # Send the email
             server.sendmail(email_address, recipient_email, msg.as_string())
-            print("Email sent successfully!")
+            # print("Email sent successfully!")
     except Exception as e:
         print(f"Error sending email: {e}")
 
@@ -53,8 +53,9 @@ searchTerms = ("Taichi Lite",
                "Super Flower",
                "DDR5")
 posts_found = []
-subreddit = reddit.subreddit('buildapcsales')
 reddit = praw.Reddit('bot1')
+subreddit = reddit.subreddit('buildapcsales')
+
 
 with open("posts_found.txt", "r") as f:
     posts_found = f.read()
@@ -65,13 +66,13 @@ while True:
     for submission in subreddit.new(limit=20):
         time.sleep(2)
         post_title = submission.title
-        print("Checking post: " + post_title)
+        # print("Checking post: " + post_title)
         for term in searchTerms:
             if term in post_title:
-                time.sleep(2)
                 if submission.id not in posts_found:
+                    time.sleep(15)
                     send_email("rfreemanh@gmail.com", "PC Part Alert", make_alert(term))
-                    print("Email sent")
+                    print (f"Email sent about {post_title}")
         else:
             pass
     with open("posts_found.txt", "w") as f:
