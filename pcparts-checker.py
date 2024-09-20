@@ -71,8 +71,8 @@ while True:
             if term in post_title:
                 if submission.id not in posts_found:
                     time.sleep(15)
-                    send_email("rfreemanh@gmail.com", "PC Part Alert", make_alert(term))
-                    print (f"Email sent about {post_title}")
+                    # send_email("rfreemanh@gmail.com", "PC Part Alert", make_alert(term))
+                    print (make_alert(term))
         else:
             pass
     with open("posts_found.txt", "w") as f:
